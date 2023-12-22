@@ -165,56 +165,6 @@ class _InputSliderState extends State<InputSlider> {
           child: Align(
               alignment: Alignment.centerLeft,
               child: widget.leading)),
-      Padding(
-        padding: EdgeInsets.only(left: 8.0),
-      ),
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: SizedBox(
-          width: textFieldSize!.width,
-          height: textFieldSize!.height,
-          child: TextField(
-            controller: _controller,
-            keyboardType: TextInputType.numberWithOptions(signed: true, decimal: true),
-            style: widget.textFieldStyle ?? DefaultTextStyle.of(context).style,
-            onSubmitted: (value) {
-              double parsedValue = double.tryParse(value) ?? this.defaultValue;
-              parsedValue = parsedValue.clamp(widget.min, widget.max);
-              setState(() {
-                this.defaultValue = parsedValue;
-              });
-              _setControllerValue(this.defaultValue);
-              widget.onChangeEnd?.call(this.defaultValue);
-            },
-            textAlign: TextAlign.center,
-            decoration: widget.inputDecoration ??
-                InputDecoration(
-                  enabledBorder: OutlineInputBorder(
-                      borderRadius:
-                          widget.borderRadius ?? BorderRadius.circular(8),
-                      borderSide: BorderSide(
-                          color: widget.borderColor ??
-                              Theme.of(context).hintColor)),
-                  border: OutlineInputBorder(
-                      borderRadius:
-                          widget.borderRadius ?? BorderRadius.circular(8),
-                      borderSide: BorderSide(
-                          color: widget.borderColor ??
-                              Theme.of(context).hintColor)),
-                  focusedBorder: OutlineInputBorder(
-                      borderRadius:
-                          widget.borderRadius ?? BorderRadius.circular(8),
-                      borderSide: BorderSide(
-                          width: 2,
-                          color: widget.focusBorderColor ??
-                              Theme.of(context).primaryColor)),
-                  filled: widget.filled,
-                  fillColor: widget.fillColor,
-                  contentPadding: EdgeInsets.only(top: 5),
-                ),
-          ),
-        ),
-      ),
       widget.vertical ? Flexible(
           flex: widget.sliderWeight ?? 1,
           fit: FlexFit.tight,
@@ -253,6 +203,56 @@ class _InputSliderState extends State<InputSlider> {
             });
             _setControllerValue(value);
           },
+        ),
+      ),
+      Padding(
+        padding: EdgeInsets.only(left: 8.0),
+      ),
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: SizedBox(
+          width: textFieldSize!.width,
+          height: textFieldSize!.height,
+          child: TextField(
+            controller: _controller,
+            keyboardType: TextInputType.numberWithOptions(signed: true, decimal: true),
+            style: widget.textFieldStyle ?? DefaultTextStyle.of(context).style,
+            onSubmitted: (value) {
+              double parsedValue = double.tryParse(value) ?? this.defaultValue;
+              parsedValue = parsedValue.clamp(widget.min, widget.max);
+              setState(() {
+                this.defaultValue = parsedValue;
+              });
+              _setControllerValue(this.defaultValue);
+              widget.onChangeEnd?.call(this.defaultValue);
+            },
+            textAlign: TextAlign.center,
+            decoration: widget.inputDecoration ??
+                InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius:
+                      widget.borderRadius ?? BorderRadius.circular(8),
+                      borderSide: BorderSide(
+                          color: widget.borderColor ??
+                              Theme.of(context).hintColor)),
+                  border: OutlineInputBorder(
+                      borderRadius:
+                      widget.borderRadius ?? BorderRadius.circular(8),
+                      borderSide: BorderSide(
+                          color: widget.borderColor ??
+                              Theme.of(context).hintColor)),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius:
+                      widget.borderRadius ?? BorderRadius.circular(8),
+                      borderSide: BorderSide(
+                          width: 2,
+                          color: widget.focusBorderColor ??
+                              Theme.of(context).primaryColor)),
+                  filled: widget.filled,
+                  fillColor: widget.fillColor,
+                  contentPadding: EdgeInsets.only(top: 5),
+                ),
+          ),
         ),
       ),
     ];
