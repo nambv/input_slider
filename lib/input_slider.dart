@@ -217,7 +217,7 @@ class _InputSliderState extends State<InputSlider> {
             controller: _controller,
             keyboardType: TextInputType.numberWithOptions(signed: true, decimal: true),
             style: widget.textFieldStyle ?? DefaultTextStyle.of(context).style,
-            onSubmitted: (value) {
+            onChanged: (value) {
               double parsedValue = double.tryParse(value) ?? this.defaultValue;
               parsedValue = parsedValue.clamp(widget.min, widget.max);
               setState(() {
